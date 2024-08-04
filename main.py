@@ -22,8 +22,16 @@ students = {
 async def root():
     return {"message": "Hello World"}
 
+@app.get('/students')
+async def get_students():
+    return students
+
 @app.get("/student/{student_id}")
 async def get_student(student_id: int = Path(description="The ID of the student you want to view", gt=0, lt=4)):
     return students[student_id]
+
+@app.get("/get-name/{student_id}")
+async def get_name(student_id: int):
+    return students[student_id]["name"]
 
 
